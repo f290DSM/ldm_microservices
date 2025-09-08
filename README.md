@@ -105,3 +105,40 @@ http://localhost:8761
 ![](/docs/images/eureka.png)
 
 > Observe que o servidor está on-line mas precisamos registrar as instancias de microserviços nele.
+
+
+## Criando o MicroService de Clientes
+
+## Criando o projeto ClientMS
+
+1. No site [Spring Initializr](https://start.spring.io) crie um novo projeto Spring com base no seu mabiente de desenvolvimento e inclua as dependências necessárias:
+    - Spring Web
+    - Spring Eureka Client
+    - Spring Actuator
+    - Lombok
+
+2. Após gerar, baixe o projeto e abra-o no seu IDE.
+
+3. Renomeie o arquivo `application.properties` para `application.yml` e configure as propriedades do Spring Boot para o seu ambiente de desenvolvimento.
+
+```yml
+spring:
+   application:
+      name: clientms
+
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: http://localhost:8761/eureka/
+      initialInstanceInfoReplicationIntervalSeconds: 5
+      registryFetchIntervalSeconds: 5
+   instance:
+      leaseRenewalIntervalInSeconds: 5
+      leaseExpirationDurationInSeconds: 5
+      instance-id: ${spring.application.name}:${spring.application.instance_id:${ramdom.value}}
+
+server:
+   port: 0
+```
+
+4. Inicie o projeto com o comando `./gradlew bootRun`.
