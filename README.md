@@ -102,6 +102,6 @@ public class EurekaServerApplication {
 http://localhost:8761
 ```
 
-![](docs/images/eureka.png)
+![](/docs/images/eureka.png)
 
 > Observe que o servidor está on-line mas precisamos registrar as instancias de microserviços nele.
