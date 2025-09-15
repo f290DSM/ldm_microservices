@@ -24,7 +24,7 @@ public class ClientResource {
                 .uuid(UUID.randomUUID().toString())
                 .name("Client " + UUID.randomUUID().toString())
                 .email("vip@client.com")
-                .address("server: " + instanceInformationService.getServerPort())
+                .address("server port: " + instanceInformationService.getServerPort())
                 .build();
     }
 }
