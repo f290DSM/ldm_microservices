@@ -12,6 +12,6 @@ eureka:
     leaseRenewalIntervalInSeconds: 5
     leaseExpirationDurationInSeconds: 5
 #    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-
+#
 #server:
 #  port: 0

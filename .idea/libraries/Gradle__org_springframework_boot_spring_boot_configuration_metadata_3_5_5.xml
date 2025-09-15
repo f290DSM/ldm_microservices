@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-configuration-metadata:3.5.5" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.boot" artifactId="spring-boot-configuration-metadata" version="3.5.5" baseVersion="3.5.5" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-metadata/3.5.5/6f5a3908a6cc8744a2e7f6a3c64d3cf37b097ac8/spring-boot-configuration-metadata-3.5.5.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-metadata/3.5.5/43f6291f8ff6782076477999a4a9df794180a0f2/spring-boot-configuration-metadata-3.5.5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-metadata/3.5.5/d259b7bcf61f27271a8e172e25e586a5cfd6bd3a/spring-boot-configuration-metadata-3.5.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

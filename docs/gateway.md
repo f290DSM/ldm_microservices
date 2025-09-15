@@ -191,7 +191,7 @@ No sexto terminal, iremos disparar as requisições; então será necessário um
 
 ### Resultado esperado
 
-Como resultado, é esperado que enviemos todas as requisições para a url `http://localhost:8080/product/1` e que as 3 instancias retornem o processamento das requisições, você poderá conferir pelo número da porta que a requisição retornou.
+Como resultado, é esperado que enviemos todas as requisições para a url `http://localhost:8765/clients` e que as 3 instancias retornem o processamento das requisições, você poderá conferir pelo número da porta que a requisição retornou.
 
 ```shell
 curl "http://localhost:8765/clients"
