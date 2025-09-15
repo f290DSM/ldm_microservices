@@ -212,3 +212,45 @@ curl "http://localhost:8765/clients"
 curl "http://localhost:8765/clients"
 {"uuid":"479d0607-d598-42ee-a475-3257d923c3e2","name":"Client e478f44b-8abf-4186-a185-319802efc972","email":"vip@client.com","address":"server port: 8003"}
 ```
+
+# Configurando o MonoRepo
+
+Na raiz da pasta `ldmp_microservices` voce precisará incluir alguns arquivos gradle para poder tratar as dependencias do MonoRepo.
+
+1. Copie os arquivos listados abaixo do projeto `clientms`:
+* Diretório gradle;
+* Arquivp gradlew;
+* Arquivo gradlew.bat;
+* Arquivo settings.gradle;
+
+2. Edite o arquivo settings.gradle e adicione os projetos abaixo:
+
+```gradle
+rootProject.name = 'ldmp_microservices'
+include 'spring-cloud:eureka-server'
+include 'spring-cloud:edge-server'
+include 'microservices:clientms'
+```
+3. Clique no logo do Gradle e selecione a opção `Refresh`;
+4. Compile os projetos a partir da raiz ldmp_microservices:
+```gradle
+./gradlew build
+```
+ 
+ 5. Abra a Guia de Services e execute as seguintes ações;
+ * Edite a configuração ClientmsApplication;
+ * Renomeie-a para ClientmsApplication1;
+ * Clique em `Modify options` e adicione a opção `Add VM Options`;
+ * Adicione a opção `-Dserver.port=8001`;
+
+ 6. Crie um cópia de ClientmsApplication1 e renomeie-a para ClientmsApplication2;
+ * Altere a opção `-Dserver.port=8002`;
+
+ 7. Crie um cópia de ClientmsApplication2 e renomeie-a para ClientmsApplication3;
+ * Altere a opção `-Dserver.port=8003`;
+ 
+ ## Inciando os projetos pela IDE.
+
+ Agora voce pode inicializar os projetos pela IDE ao invés dos terminais.
+
+
