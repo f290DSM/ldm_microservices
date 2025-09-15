@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ldmp_microservices.iml" filepath="$PROJECT_DIR$/.idea/ldmp_microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/microservices/clientms/ldm_microservices.microservices.clientms.main.iml" filepath="$PROJECT_DIR$/.idea/modules/microservices/clientms/ldm_microservices.microservices.clientms.main.iml" />
     </modules>
   </component>
 </project>
