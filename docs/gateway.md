@@ -65,18 +65,7 @@ Agora que nossos microserviços estão devidamente registrados ao **Eureka Serve
 
 ### Configurando o Load Balancer
 
-No arquivo `àpplication.yml` do **Edge Server**, inclua as configurações de roteamento, abaixo do nível cloud:
-
-```yml
-    gateway:
-      routes:
-        - id: clientms
-          uri: lb://clientms
-          predicates:
-            - Path=/clients/**
-```
-
-> Nesta seção, configuramos a captura das requisições ao micro serviço **clientms** para com o end-point **/clients/**, assim todas as requisições para este end-point serão balanceadas para as instancias dos micro serviços  disponíveis. COmo temos 3 instancias, cada instancia receberá uma parte da carga das requisições.
+> Nesta seção, configuramos a captura das requisições ao micro serviço **clientms** para com o end-point **/clients/**, assim todas as requisições para este end-point serão balanceadas para as instancias dos micro serviços  disponíveis. Como temos 3 instancias, cada instancia receberá uma parte da carga das requisições.
 
 O arquivo final ficará desta forma.
 
