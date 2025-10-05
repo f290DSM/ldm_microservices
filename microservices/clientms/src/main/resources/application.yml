@@ -1,6 +1,11 @@
 spring:
   application:
     name: clientms
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      profile: test
 
 eureka:
   client:
@@ -11,7 +16,3 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 5
     leaseExpirationDurationInSeconds: 5
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-#
-#server:
-#  port: 0

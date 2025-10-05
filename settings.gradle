@@ -1,3 +1,4 @@
 include 'microservices:clientms'
 include 'spring-cloud:eureka-server'
 include 'spring-cloud:edge-server'
+include 'spring-cloud:config-server'
