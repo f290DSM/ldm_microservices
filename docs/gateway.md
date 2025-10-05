@@ -28,9 +28,9 @@ flowchart TD
 
 # Criando o Edge Server
 
-1. Dentro do diretorio `spring-cloud` crie um projeto Spring com a dependencias: * `Actuator` e `Gateway`;
-3. Renomeie o arquivo `main\resources\application.properties` para `application.yml`;
-4. No arquivo `application.yml` inclua as configurações.
+1. Dentro do diretorio `spring-cloud` crie um projeto Spring com a dependencias: * `Actuator` e `Reative Gateway`;
+2. Renomeie o arquivo `main\resources\application.properties` para `application.yml`;
+3. No arquivo `application.yml` inclua as configurações.
 
 ```yml
 server:
@@ -61,7 +61,7 @@ eureka:
 
 ## Criando o roteamento e balanceamento de carga.
 
-Agora que nossos microserviços estão devidamente registrados ao **Eureka Server**, vamos configurar o balanceamento de carga para nossos mricr-serviços.
+Agora que nossos microserviços estão devidamente registrados ao **Eureka Server**, vamos configurar o balanceamento de carga para nossos mricro-serviços.
 
 ### Configurando o Load Balancer
 
@@ -94,33 +94,58 @@ eureka:
 ```
 
 #### Configurando o roteamento via Java
+Agora iremos realizar as configuracoes de roteamento via `.YML`.
 
-> Crie o pacote config e crie o Bean abaixo; ele far'a o roteamento das requisicoes para o micro-service clientms.
+> Inclua no arquivo de configurações as configuraões abaixo.
 
-```java
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+```yml
+server:
+  port: 8765
 
-@Configuration
-public class ApiGatewayConfiguration {
-    @Bean
-    public RouteLocator getRouter(RouteLocatorBuilder builder) {
-        return builder
-                .routes()
-                .route("clientms", p -> p.path("/clients/**").uri("lb://clientms"))
-                .build();
-    }
-
-}
+spring:
+  application:
+    name: edgeserver
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          routes:
+            - id: clientms
+              uri: lb://clientms
+              predicates:
+                - Path=/clients/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 ```
 
-> Em outro momento iremos realizar as configuracoes de roteamento via .YML.
+Observe que no trecho abaixo, estamos configurando o balanceamento de carga para as instancias do micro serviço de clientes.
+```yml
+          routes:
+            - id: clientms # Identificador de micro serviço
+              uri: lb://clientms # Balanceamento de carga com base no id do micrp serviço
+              predicates:
+                - Path=/clients/** # Configuração dos paths com os identificadores dos resources da API
+``` 
 
 #### Inicie o Edge Server e confirme seu status no Eureka Service Discovery.
 
-![](../docs/images/edge-server.png)
+![](../docs/images/eureka2.png)
 
 ### Alterando o ClientMS Service
 
@@ -161,14 +186,14 @@ Precisamos subir 3 instancias do microverviço, realizar várias requisições e
 
 ## Subindo as instancias
 
-Você precisará de 6 terminais em baerto para realizar os testes, então siga os steps abaixo atentamente.
+Você precisará de 6 terminais em abertos para realizar os testes, então siga os steps abaixo atentamente.
 
-1. Para todas os projetos;
+1. Pare todas os projetos ativos;
 2. Inicialize o **Service Discovery**, no primeiro terminal, a partir da raiz do `eureka-server`;
 ```yml
 .\gradlew bootRun
 ```
-3. Inicialize o **Edge Server**, no segundo terminal, a partir da raiz do `edgeserver`;
+3. Inicialize o **Edge Server**, no segundo terminal, a partir da raiz do `edge-server`;
 ```yml
 .\gradlew bootRun
 ```
@@ -184,10 +209,13 @@ Você precisará de 6 terminais em baerto para realizar os testes, então siga o
 ```yml
 .\gradlew bootRun --args='--server.port=8003'
 ```
+7. Visualize as 3 instancias do `clientms` e `edge-server` no `eureka-sever`.
+
+![](images/eureka2.png)
 
 ## Validando o balanceamento
 
-No sexto terminal, iremos disparar as requisições; então será necessário um pouco de destreza para enviar pelo menos umas 20 requisições o mais rápido que puder e verificar o **IP** retornado por cada uma das instancias.
+Em um outro terminal, iremos disparar as requisições; então será necessário um pouco de destreza para enviar pelo menos umas 20 requisições o mais rápido que puder e verificar o **IP** retornado por cada uma das instancias.
 
 ### Resultado esperado
 
@@ -213,7 +241,23 @@ curl "http://localhost:8765/clients"
 {"uuid":"479d0607-d598-42ee-a475-3257d923c3e2","name":"Client e478f44b-8abf-4186-a185-319802efc972","email":"vip@client.com","address":"server port: 8003"}
 ```
 
+# Parabéns, vocâ acabou de implementar mais um Design Pattern para Micro Serviços, o Edge Server.
+
+O Edge Server irá esconder as 3 instancias dos micro serviços de clientes atrás do IP do gateway.
+
+Todas as chamadas serão realizadas ao Edge Server na porta 8765.
+
+Cada recurso será acessado com o prefixo do micro serviço registrado no Eureka Server, então para acessar qualquer uma das 3 instancias devemos acessar o end-point.
+
+```shell
+http://localhost:8765/clientms/clients
+```
+
+> O Edge Server se encarregará do balanceamento e redirecionamento das requisições para os devidos micro serviços do ecossistema.
+
 # Configurando o MonoRepo
+
+> Agora chega de criar terminais isolados, vamos configurar o nosso projeto para que possamos realizar quaisquer testes e configurações à partir de uma estrutura centralizada e controlada pelo Gradle.`
 
 Na raiz da pasta `ldmp_microservices` voce precisará incluir alguns arquivos gradle para poder tratar as dependencias do MonoRepo.
 

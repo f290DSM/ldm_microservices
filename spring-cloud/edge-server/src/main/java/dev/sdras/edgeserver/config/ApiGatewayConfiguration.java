@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ApiGatewayConfiguration {
-    @Bean
-    RouteLocator getRouteLocator(RouteLocatorBuilder builder) {
-        return builder
-                .routes()
-                .route("clientms", p -> p.path("/clients/**").uri("lb://clientms"))
-                .build();
-    }
+//    @Bean
+//    RouteLocator getRouteLocator(RouteLocatorBuilder builder) {
+//        return builder
+//                .routes()
+//                .route("clientms", p -> p.path("/clients/**").uri("lb://clientms"))
+//                .build();
+//    }
 }

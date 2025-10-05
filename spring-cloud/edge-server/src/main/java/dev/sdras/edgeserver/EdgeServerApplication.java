@@ -1,4 +1,4 @@
-package dev.sdras.microservices.edgeserver;
+package dev.sdras.edgeserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

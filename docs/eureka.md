@@ -52,7 +52,7 @@ Se um cliente parar de responder, o Eureka Server o remove da lista.
 ## Criando um Service Discovery
 
 1. No diretório raiz `microservices`, crie o diretorio `spring-cloud`;
-2. Dentro do diretorio `spring-cloud` crie um projeto Spring com a dependencias: * `Web`, `Actuator` e `Netflix Eureka Server`;
+2. Dentro do diretorio `spring-cloud` crie o projeto `eureka-server` com a dependencias: * `Web`, `Actuator` e `Netflix Eureka Server`;
 3. Renomeie o arquivo `main\resources\application.properties` para `application.yml`;
 4. No arquivo `application.yml` inclua as configurações.
 
@@ -111,7 +111,7 @@ http://localhost:8761
 
 ## Configure o projeto ClientMS
 
-1. Renomeie o arquivo `application.properties` para `application.yml` e configure as propriedades do Spring Boot para o seu ambiente de desenvolvimento.
+1. No projeto `clientms`, renomeie o arquivo `application.properties` para `application.yml` e configure as propriedades do Spring Boot para o seu ambiente de desenvolvimento.
 ```yml
 spring:
    application:
@@ -131,7 +131,11 @@ eureka:
 server:
    port: 0
 ```
+2. À partir da raiz do projeto `clientms`, inicie o projeto **clientms** com o comando abaixo.
+```shell
+./gradlew bootRun`
+```
+3. Abra 2 terminais e inicialize outras 2 instancias com o comando acima, cada um em um novo terminal;
+4. Verifique o EurekaServer o registro do micro-service **clientms**.
 
-4. Inicie o projeto **clientms** com o comando `./gradlew bootRun`.
-5. Abra 2 terminais e inicialize outras 2 instancias;
-6. Verifique o EurekaServer o registro do micro-service **clientms**.
+![](images/eureka1.png)

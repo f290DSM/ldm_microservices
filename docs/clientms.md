@@ -1,4 +1,4 @@
-# Product Service
+# Client Micro Service
 
 ## Guide
 
@@ -7,7 +7,7 @@
 1. Crie um diretorio ldmp_microservices;
 2. Dentro do diretorio ldmp_microservices crie o diretorio microservices;
 3. Dentro do diretório `microservices`, crie um projeto Spring Boot com dependencia `Spring Web`, `Spring Actuator` e `Lombok`;
-4Ative o `Annotation Processors` nos pluggins do IntelliJ.
+4. Ative o `Annotation Processors` nos pluggins do IntelliJ.
 
 ### Camada de Domínio
 
@@ -63,7 +63,7 @@ public class InstanceInformationService implements ApplicationListener<WebServer
 
 ### Camada de Aplicacao
 
-A camda de aplicacao será composta por 2 classes inicialmente, um service  e um resource.
+A camada de aplicacao será composta por 2 classes inicialmente, um service e um resource.
 
 1. Crie a classe `ClientResource` no pacote `resources`, o applicatio deve estar na raiz do projeto.
 2. Inclua o codigo abaixo na classe:
@@ -116,6 +116,10 @@ spring:
 ## Testando a aplicação
 
 1. Execute a aplicação;
+> A dentro do diretório raiz de clientms execute o projet com o comando abaixo.
+```shell
+.\gradlew bootRun
+```
 2. No navegador, entre com a url `localhost:9000`, o resultado deve ser um white label.
 3. No navegador, entre com a url `localhost:9000/clients`, o resultado deve ser um json conforme o exemplo abaixo.
 
