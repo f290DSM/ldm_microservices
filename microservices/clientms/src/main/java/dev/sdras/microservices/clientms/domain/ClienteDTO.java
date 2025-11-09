@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Client {
-    private String uuid;
-    private String name;
-    private String email;
-    private String address;
+@NoArgsConstructor
+public final class ClienteDTO {
+    private String cpf;
+    private String nome;
+    private Integer idade;
 }
