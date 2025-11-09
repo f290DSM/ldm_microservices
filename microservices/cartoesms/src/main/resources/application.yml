@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: cartoesms
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      profile: test
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5

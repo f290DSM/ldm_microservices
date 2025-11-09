@@ -71,7 +71,7 @@ A camada de aplicacao será composta por 2 classes inicialmente, um service e um
 ```java
 package seupacotedeaplicacao.resources;
 
-import dev.sdras.microservices.clientms.domain.Client;
+import dev.sdras.microservices.clientms.domain.ClienteDTO;
 import dev.sdras.microservices.clientms.services.InstanceInformationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

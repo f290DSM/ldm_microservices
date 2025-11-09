@@ -16,7 +16,11 @@ spring:
             - id: clientms
               uri: lb://clientms
               predicates:
-                - Path=/clients/**
+                - Path=/clientes/**
+            - id: cartoesms
+              uri: lb://cartoesms
+              predicates:
+                - Path=/cartoes/**
 eureka:
   client:
     register-with-eureka: true
